@@ -72,7 +72,7 @@ else:
     print(f"lo siento, el modelo '{modelo_buscado}' no se encontró ") 
 
 
-#cambio de prueba 
+#este es un código que acabo de crear desde el teléfono 
 
 
 
