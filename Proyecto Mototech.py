@@ -72,6 +72,7 @@ def crear_cliente(nombre,  telefono, moto_asociada):
 
 
 
+
 # --- Logica principal del programa --- 
 
 
@@ -103,16 +104,26 @@ if moto_encontrada:
             kilometraje_restante = moto_encontrada["intervalo"] - solictud_kilometraje_actual
             print(f"\nAun no es necesario realizar al mantenimiento")
             print(f"\nfaltan {kilometraje_restante} para el proximo servicio")
-    except ValueError:
-        print(f"/nEntrada invalida. Por favor, ingresa un numero valido para el kilometraje")
 
+       solicitud_costo_repuesto = float(input("\npor favor ingresa el costo del repuesto:"))
+       solicitud_costo_mano_de_obra = float(input("por favor ingresa el costo de la mano de obra:"))
+       costo_total_final = calcular_costo_servicio (solicitud_costo_repuesto,solicitud_costo_mano_de_obra )
+       print(f"el costo total de servicio es: {costo_total_final}")
+
+
+    #crea un diccionario con los datos del servicio actual
+       nuevo_servicio = {
+            "fecha" : "21/08/2025",  #usaremos una fecha fija por ahora
+            "kilometraje" : solictud_kilometraje_actual,
+            "costo" : costo_total_final,
+            "tareas realizadas" : moto_encontrada ["mantenimiento"]
+    }
+
+#agregar el servicio al historial del cliente
         
-    # 3. calculamos los costos
-    try:
-        solicitud_costo_repuesto = float(input("\npor favor ingresa el costo del repuesto:"))
-        solicitud_costo_mano_de_obra = float(input("por favor ingresa el costo de la mano de obra:"))
-        costo_total_final = calcular_costo_servicio (solicitud_costo_repuesto,solicitud_costo_mano_de_obra )
-        print(f"el costo total de servicio es: {costo_total_final}")
+       base_de_datos_de_clientes [nombre_cliente] ["historial_mantenimientos"].append (nuevo_servicio)
+       print("\nEl servicio ha sido guardado en el historial de mantenimientos del cliente.")
+
     except ValueError:
         print(f"\nEntrada invalida, por favor, ingresa solo numeros para los costos")
        
