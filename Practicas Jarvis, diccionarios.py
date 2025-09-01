@@ -152,7 +152,7 @@ else:
     print("la bateria esta completamente descargada")
 
 
-#Ejercicios de flujo de control con blcles  while 
+#Ejercicios de flujo de control con bucles  while 
 #El bucle se ejecutara mientras contador sea menor a 5
 
 contador= 0
@@ -182,6 +182,8 @@ for repuesto in repuestos:
         print("saliendo del bucle despues de encontrar el repuesto llanta")
         break
     print(f"revisando el respuesto : {repuesto}")
+
+    
 
 
 

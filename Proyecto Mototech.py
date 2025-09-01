@@ -74,10 +74,14 @@ def crear_cliente(nombre,  telefono, moto_asociada):
 
 #funcion para buscar si el cliete existe en la base de datos
 def ver_historial_cliente(nombre_cliente):
-    for cliente_MotoTech in base_de_datos_de_clientes:
-        if cliente_MotoTech == nombre_cliente:
-            return cliente_MotoTech
-
+    if nombre_cliente in base_de_datos_de_clientes:
+        print("¡cliente encontrado!")
+        cliente = base_de_datos_de_clientes[nombre_cliente]
+        for historial in cliente['historial_mantenimientos']:
+            print(f"fecha: {historial['fecha']}, kilometraje: {historial['kilometraje']}, costo: {historial['costo']}")
+    
+    else:
+        print("cliente no encontrado")
 
 
 
