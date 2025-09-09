@@ -66,6 +66,21 @@ def buscar_moto_por_modelo(modelo_a_buscar):
             return moto_encontrada
     return None 
 
+def registrar_cliente():
+    solicitud_de_datos_nombre = input("Por favor agrega tu nombre:")
+    solicitud_de_datos_telefono = input("Por favor agrega tu numero de telefono:")
+    solicitud_de_datos_modelo_moto = input("Por favor agrega el modelo de tu moto:")
+    nuevo_cliente = {
+    
+        "nombre_cliente" : solicitud_de_datos_nombre,
+        "telefono_cliente" : solicitud_de_datos_telefono,
+        "modelo_moto" : solicitud_de_datos_modelo_moto,
+        "historial_mantenimientos" : []
+    }
+    base_de_datos_de_cliente[solicitud_de_datos_nombre] = nuevo_cliente
+    
+
+
 
 
 
@@ -73,13 +88,13 @@ def buscar_moto_por_modelo(modelo_a_buscar):
 #aqui empiezo a dar logica al programa
 listar_motos()
 #en la llamda a la funcion "buscar moto por modelo" primero coloco un input
-modelo_buscado = input("Por favor ingresa el modelo de tu moto")
-#despues llamo a la funcion
-buscar_moto_por_modelo(modelo_buscado)
+modelo_buscado = input("Por favor ingresa el modelo de tu moto:").strip()  
 #luego creo otra variable en el que guardo en retorno de la operacion cuando llamo a la funcion
-moto_ya_econtrada = buscar_moto_por_modelo (modelo_buscado)
+moto_ya_econtrada = buscar_moto_por_modelo(modelo_buscado)
 if moto_ya_econtrada:
-    print("hemos encontrado tu  modelo de moto")
+    print("!Moto encontrada¡ aqui estan los detalles")
+    for clave, valor in moto_ya_econtrada.items():
+        print(f"\n{clave} : {valor}")
 else:
     print("lo siento, no hemos podido encontrar tu modelo de moto")
 
