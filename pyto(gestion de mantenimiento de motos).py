@@ -84,6 +84,24 @@ def registrar_cliente():
     }
     base_de_datos_de_cliente[solicitud_de_datos_nombre] = nuevo_cliente
     print("Gracias por la informacion, tus datos han sido registrados")
+
+def registrar_mantenimiento():
+    solicitud_de_datos = input("por favor escribe aqui tu nombre:").strip() .lower()
+    if solicitud_de_datos in base_de_datos_de_cliente:
+        solicitud_kilometraje_actual = input("Por favor escribe el kilometraje de tu moto")
+        solicitud_costo_servicio = input("Por favor, escribe el costo del servicio")
+        solicitud_descripcion_trabajo_realizado = input("coloca aqui el trabajo que se le ha realizado a tu moto")
+        nuevo_manetenimiento = {
+            "kilometraje" : solicitud_kilometraje_actual,
+            "costo" : solicitud_costo_servicio,
+            "descipcion" : solicitud_descripcion_trabajo_realizado
+        }
+        cliente_encontrado = base_de_datos_de_cliente[solicitud_de_datos]
+        cliente_encontrado ['historial_mantenimientos'].append (nuevo_manetenimiento)
+        print("!felicidades, has sido encontrado!")
+    else:
+        print("lo siento, no hemos encontrado tu usuario")
+
     
 
 
@@ -109,7 +127,7 @@ while True:
             for clave, valor in moto_ya_econtrada.items():
                 print(f"\n{clave} : {valor}")
         else:
-                print("lo siento, no hemos podido encontrar tu modelo de moto")
+            print("lo siento, no hemos podido encontrar tu modelo de moto")
     elif opcion == "3":
         registrar_cliente()
     elif opcion == "4":
