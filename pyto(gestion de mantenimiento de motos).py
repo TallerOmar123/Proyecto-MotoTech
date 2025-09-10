@@ -48,6 +48,8 @@ base_de_datos_de_motos= [
 #datos para poder ejecutar el programa
 base_de_datos_de_cliente = {}
 
+
+        
 #Ahora la tarea es definir una funcion que me muestre los modelos de motos 
 # disponibles que tengo en este programa.
 #nota: los parentesis vacios indican que no necesito ningun argumento
@@ -62,10 +64,13 @@ def listar_motos ():
 #con el input que me entregue el cliente
 def buscar_moto_por_modelo(modelo_a_buscar):
     for moto_encontrada in base_de_datos_de_motos:
-        if moto_encontrada['modelo'] == modelo_a_buscar:
+        if moto_encontrada['modelo'].lower() == modelo_a_buscar.lower():
             return moto_encontrada
     return None 
 
+#creo una funcion que me permite recibir los datos de mi cliente, y ademas 
+#agrego un diccionario para trabajar desde un bloque que pueda manejar mejor
+#por ultimo agrego este diccionario a la basde de datos del cliente
 def registrar_cliente():
     solicitud_de_datos_nombre = input("Por favor agrega tu nombre:")
     solicitud_de_datos_telefono = input("Por favor agrega tu numero de telefono:")
@@ -78,23 +83,45 @@ def registrar_cliente():
         "historial_mantenimientos" : []
     }
     base_de_datos_de_cliente[solicitud_de_datos_nombre] = nuevo_cliente
+    print("Gracias por la informacion, tus datos han sido registrados")
     
 
 
 
+#aqui es la parte donde creo el esqueleto del porgrama... para ir dando una 
+#mejor estructura
+
+while True:
+    print("\n !Bienvenido a MotoTech!")
+    print("1. ver modelos de motos")
+    print("2. buscar una moto por modelo")
+    print("3. registrar un nuevo cliente")
+    print("4. salir")
+    opcion = input("Por favor selecciona una opcion:").strip()
+
+    if opcion == "1":
+        listar_motos() ##aqui empiezo a dar logica al programa
+    elif opcion == "2":
+        modelo_buscado = input("Por favor ingresa el modelo de tu moto:").strip() .lower() #aqui hago una llamada a la funcion de buscar modelo con un input
+        moto_ya_econtrada = buscar_moto_por_modelo(modelo_buscado)   #luego creo otra variable en el que guardo en retorno de la operacion cuando llamo a la funcion
+        if moto_ya_econtrada:
+            print("!Moto encontrada¡ aqui estan los detalles")
+            for clave, valor in moto_ya_econtrada.items():
+                print(f"\n{clave} : {valor}")
+        else:
+                print("lo siento, no hemos podido encontrar tu modelo de moto")
+    elif opcion == "3":
+        registrar_cliente()
+    elif opcion == "4":
+        print("!Gracias por usar MotoTech! hasta pronto")
+        break # este comando finaliza el bucle
+    else:
+        print("opcion no valida, por favor intenta de nuevo ")
 
 
 
-#aqui empiezo a dar logica al programa
-listar_motos()
-#en la llamda a la funcion "buscar moto por modelo" primero coloco un input
-modelo_buscado = input("Por favor ingresa el modelo de tu moto:").strip()  
-#luego creo otra variable en el que guardo en retorno de la operacion cuando llamo a la funcion
-moto_ya_econtrada = buscar_moto_por_modelo(modelo_buscado)
-if moto_ya_econtrada:
-    print("!Moto encontrada¡ aqui estan los detalles")
-    for clave, valor in moto_ya_econtrada.items():
-        print(f"\n{clave} : {valor}")
-else:
-    print("lo siento, no hemos podido encontrar tu modelo de moto")
+
+
+
+
 
