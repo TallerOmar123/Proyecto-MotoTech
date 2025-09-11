@@ -138,7 +138,9 @@ while True:
     print("1. ver modelos de motos")
     print("2. buscar una moto por modelo")
     print("3. registrar un nuevo cliente")
-    print("4. salir")
+    print("4. registrar mantenimiento")
+    print("5. ver historial de mantenimientos")
+    print("6. salida")
     opcion = input("Por favor selecciona una opcion:").lower().strip()
 
     if opcion == "1":
@@ -157,8 +159,12 @@ while True:
     elif opcion == "3":
         registrar_cliente()
     elif opcion == "4":
-        print("!Gracias por usar MotoTech! hasta pronto")
-        break # este comando finaliza el bucle
+        registrar_mantenimiento()
+    elif opcion == "5":
+        ver_historial_mantenimientos()
+    elif opcion == "6":
+        print("!Gracias por usar MotoTech!, hasta pronto")
+        break 
     else:
         print("opcion no valida, por favor intenta de nuevo ")
 
