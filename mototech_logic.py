@@ -1,5 +1,8 @@
 import json
 
+# Variable global para guardar los datos cargados del archivo
+datos = {}
+
 # Base de datos de las motos
 base_de_datos_de_motos = [
     {
@@ -61,22 +64,24 @@ def registrar_cliente():
     base_de_datos_de_cliente[solicitud_de_datos_nombre] = nuevo_cliente
     print("Gracias por la informacion, tus datos han sido registrados.")
 
-def registrar_mantenimiento():
-    solicitud_de_datos = input("Por favor, escribe aqui tu nombre:").strip().lower()
-    if solicitud_de_datos in base_de_datos_de_cliente:
-        solicitud_kilometraje_actual = input("Por favor, escribe el kilometraje de tu moto:")
-        solicitud_costo_servicio = input("Por favor, escribe el costo del servicio:")
-        solicitud_descripcion_trabajo_realizado = input("Coloca aqui el trabajo que se le ha realizado a tu moto:")
-        nuevo_mantenimiento = {
-            "kilometraje": solicitud_kilometraje_actual,
-            "costo": solicitud_costo_servicio,
-            "descipcion": solicitud_descripcion_trabajo_realizado
-        }
-        cliente_encontrado = base_de_datos_de_cliente[solicitud_de_datos]
-        cliente_encontrado['historial_mantenimientos'].append(nuevo_mantenimiento)
-        print("¡Felicidades, has sido encontrado!")
-    else:
-        print("Lo siento, no hemos encontrado tu usuario.")
+def registrar_mantenimiento(matricula, fecha, servicio, costo):
+    # Primero buscamos si la moto ya existe
+    # Como tu base de datos no tiene matrículas, usaremos un ejemplo
+    # para ilustrar la lógica.
+    mantenimientos = datos.get('mantenimientos', {})
+    if matricula not in mantenimientos:
+        mantenimientos[matricula] = []
+    
+    nuevo_mantenimiento = {
+        "matricula": matricula,
+        "fecha": fecha,
+        "servicio": servicio,
+        "costo": costo
+    }
+    mantenimientos[matricula].append(nuevo_mantenimiento)
+    datos['mantenimientos'] = mantenimientos
+    
+    print("Mantenimiento registrado con éxito.")
 
 def ver_historial_mantenimientos():
     solicitud_nombre_cliente = input("Por favor, escribe tu nombre para poder buscar la informacion de tu moto:").strip().lower()
@@ -111,6 +116,13 @@ def cargar_datos():
         print("Datos cargados con éxito.")
     except FileNotFoundError:
         print("No se encontró el archivo de datos. Se iniciará con datos vacíos.")
+
+def obtener_mantenimientos():
+    mantenimientos_totales = {}
+    for cliente in base_de_datos_de_cliente.values():
+        for mantenimiento in cliente.get('historial_mantenimientos', []):
+            mantenimientos_totales.append(mantenimiento)
+    return list(mantenimientos_totales)
 
 # Aquí es la parte donde creamos el esqueleto del programa
 if __name__ == '__main__':
