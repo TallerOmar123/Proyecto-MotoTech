@@ -1,1 +1,11 @@
-{}
+{
+    "clientes": {},
+    "mantenimientos": [
+        {
+            "matricula": "GHY67H",
+            "fecha": "15/09/25",
+            "servicio": "Mantenimiento General",
+            "costo": "200.000"
+        }
+    ]
+}

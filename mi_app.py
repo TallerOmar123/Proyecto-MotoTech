@@ -171,24 +171,23 @@ class RegisterMaintenanceScreen(Screen):
 
 
     def registrar_mantenimiento(self, instance):
-    # Recupera los datos de los campos de texto
+        # Recupera los datos de los campos de texto
         matricula = self.bike_plate_input.text
         fecha = self.date_input.text
         servicio = self.service_input.text
-        self.cost_input.text = ""
+        costo = self.cost_input.text 
 
-    # Llama a la lógica de negocio para guardar el mantenimiento
-    # Asegúrate de que mototech_logic.registrar_mantenimiento está creado y recibe 4 argumentos
+        # Llama a la lógica de negocio para guardar el mantenimiento
         mototech_logic.registrar_mantenimiento(matricula, fecha, servicio, costo)
 
-    # Opcional: muestra un mensaje de confirmación
+        # Opcional: muestra un mensaje de confirmación
         print(f"Mantenimiento registrado para la moto con matrícula: {matricula}")
-    
-    # Opcional: limpia los campos de texto
+        
+        # Opcional: limpia los campos de texto
         self.bike_plate_input.text = ""
         self.date_input.text = ""
         self.service_input.text = ""
-        self.cost_input = "" 
+        self.cost_input.text = "" 
 
 
 class MaintenanceHistoryScreen(Screen):
